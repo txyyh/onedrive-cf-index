@@ -50,9 +50,14 @@ export async function renderFolderView(items, path, request) {
     )
 
   const intro = `<div class="intro markdown-body" style="text-align: left; margin-top: 2rem;">
-                    <h2>Yoo, I'm Spencer Woo 👋</h2>
-                    <p>This is Spencer's OneDrive public directory listing. Feel free to download any files that you find useful. Reach me at: spencer.wushangbo [at] gmail [dot] com.</p>
-                    <p><a href="https://spencerwoo.com">Portfolio</a> · <a href="https://blog.spencerwoo.com">Blog</a> · <a href="https://github.com/spencerwooo">GitHub</a></p>
+                    <h2>📁 童心音乐会的动画共享盘</h2>
+					<p>如你所见，这是一个动画共享盘。</p>
+					<p>以收藏级高清动画（尤其 BDRip） 为主。</p>
+					<p>收录范围无限制，从番剧到动画电影，从日本到中国<del>努力中</del>，并<del>努力</del>覆盖各种类型。</p>
+					<p>发现某个错误？想要某个动画？想提什么建议？都可以联系我。</p>
+					<p><strong><font color = red>注意：请各位不要线上传播本站。<del>嫖的 OneDrive 5T 账号，一段时间过多下载量要炸的</del></font></strong></p>
+					<p>PS：欲充分享受画质，请阅读Q&A最后一个问题。<p>
+                    <p><a href="https://oneindex.txyyh.workers.dev/%E5%8A%A8%E7%94%BB/">网盘入口</a> · <a href="https://oneindex.txyyh.workers.dev/Q&A.md">Q&A</a></p>
                   </div>`
 
   // Check if current directory contains README.md, if true, then render spinner
