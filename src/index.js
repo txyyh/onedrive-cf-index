@@ -62,10 +62,8 @@ async function handleRequest(request) {
   const thumbnail = config.thumbnail ? searchParams.get('thumbnail') : false
   const proxied = config.proxyDownload ? searchParams.get('proxied') !== null : false
 
-  const oneDriveApiEndpoint = config.useOneDriveCN ? 'microsoftgraph.chinacloudapi.cn' : 'graph.microsoft.com'
-
   if (thumbnail) {
-    const url = `https://${oneDriveApiEndpoint}/v1.0/me/drive/root:${base ||
+    const url = `${config.apiEndpoint.graph}/v1.0/me/drive/root:${base ||
       '/' + (neoPathname === '/' ? '' : neoPathname)}:/thumbnails/0/${thumbnail}/content`
     const resp = await fetch(url, {
       headers: {
@@ -80,7 +78,7 @@ async function handleRequest(request) {
 
   const isRequestFolder = pathname.endsWith('/') || searchParams.get('page')
   let url =
-    `https://${oneDriveApiEndpoint}/v1.0/me/drive/root${wrapPathName(neoPathname, isRequestFolder)}` +
+    `${config.apiEndpoint.graph}/v1.0/me/drive/root${wrapPathName(neoPathname, isRequestFolder)}` +
     (isRequestFolder && config.pagination.enable && config.pagination.top ? `?$top=${config.pagination.top}` : '')
 
   // get & set {pLink ,pIdx} for fetching and paging
@@ -121,7 +119,13 @@ async function handleRequest(request) {
         })
       }
 
-      return new Response(await renderFilePreview(data, pathname, fileExt), {
+      // Add preview by CloudFlare worker cache feature
+      let cacheUrl = null
+      if (config.cache.enable && config.cache.previewCache && data.size < config.cache.chunkedCacheLimit) {
+        cacheUrl = request.url + '?proxied&raw'
+      }
+
+      return new Response(await renderFilePreview(data, pathname, fileExt, cacheUrl || null), {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'text/html'

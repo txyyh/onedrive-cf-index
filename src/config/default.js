@@ -15,10 +15,16 @@ const config = {
   base: '/Animation',
 
   /**
-   * Feature: add OneDriveCN (21Vianet) support
-   * Usage: simply change `useOneDriveCN` to true
+   * Feature: add support for Chinese Onedrive (21Vianet) API endpoints
+   * Usage: set param `useCnEndpoints` value to `true`
    */
-  useOneDriveCN: false,
+  useCnEndpoints: false,
+  apiEndpoint: (useCnEndpoints => {
+    return {
+      graph: useCnEndpoints ? 'https://microsoftgraph.chinacloudapi.cn' : 'https://graph.microsoft.com',
+      auth: useCnEndpoints ? 'https://login.chinacloudapi.cn' : 'https://login.microsoftonline.com'
+    }
+  })(),
 
   /**
    * Feature: Pagination when a folder has multiple(>${top}) files
@@ -45,12 +51,14 @@ const config = {
    * `Chunked Cache` would stream the file content to the client while caching it.
    *  But there is no exact Content-Length in the response headers. ( Content-Length: chunked )
    *
+   * `previewCache`: using CloudFlare cache to preview
    */
   cache: {
-    enable: false,
+    enable: true,
     entireFileCacheLimit: 10000000, // 10MB
     chunkedCacheLimit: 100000000, // 100MB
-    paths: ['/Images']
+    previewCache: false,
+    paths: ['/🥟%20Some%20test%20files/Previews']
   },
 
   /**
