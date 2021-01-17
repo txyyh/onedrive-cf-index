@@ -12,7 +12,7 @@ const config = {
   /**
    * The base path for indexing, all files and subfolders are public by this tool. For example: `/Public`.
    */
-  base: '/Animation',
+  base: '/Anime',
 
   /**
    * Feature: add support for Chinese Onedrive (21Vianet) API endpoints
