@@ -6,7 +6,7 @@
  * NAME           user name
  * ENABLE_PATHS   enable protection on specific folders/files
  */
-export const AUTH_ENABLED = true
+export const AUTH_ENABLED = false
 export const NAME = 'guest'
 export const ENABLE_PATHS = ['/🌞 Private folder/Private folder']
 
