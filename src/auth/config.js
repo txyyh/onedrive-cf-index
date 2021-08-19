@@ -8,7 +8,7 @@
  */
 export const AUTH_ENABLED = true
 export const NAME = 'guest'
-export const ENABLE_PATHS = ['/🌞 Private folder/Private folder']
+export const ENABLE_PATHS = ['/Special']
 
 /**
  * RegExp for basic auth credentials
